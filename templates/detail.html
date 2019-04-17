@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{ worker }}
+{% endblock %}
+{% block content %}
+<style>
+a{
+    color:white;
+}
+a:hover{
+    color: #CC3434;
+}
+</style>
+<header>
+    <h2><a href="{% url 'home' %}">База сотрудников</a></h2>
+
+</header>
+
+<section style="outline: 20px solid blanchedalmond;outline-offset:-20px;width: 100%;" >
+<div>
+<h1 style="padding-top: 30px;">{{ worker }}</h1></div>
+    <img {% if worker.image %} src="{{ worker.image.url }}" {% else %} src="{% static 'user_male-512.png'%}" {% endif %}  style="margin: 30px;" width="450" height="320">
+<div class="desc" style="margin-top: 20px;margin-right: 40px;">
+    <h3>Фамилия:{{ worker.firstname }}</h3>
+<h3>Имя:{{ worker.lastname }}</h3>
+<h3>Отчество:{{ worker.fathername }}</h3>
+<h3>Пол:{% if worker.gender %}
+Мужской
+
+{% else %}
+
+    Женский
+{% endif %}</h3>
+
+<h3>Должность:{{ worker.position }}</h3>
+<h3>День рождения:{{ worker.date_birn }}</h3>
+<h3>Зарплата:{{ worker.price }}</h3>
+<h3>Страна:{{ worker.city.country }}</h3>
+<h3>Город:{{ worker.city }}</h3>
+<h3>Адрес:{{ worker.adress }}</h3>
+<h3>Телефонный номер:{{ worker.phone_number }}</h3>
+<h3>Номер домашнего телефона:{{ worker.home_phone_number }}</h3>
+</div>
+</section>
+
+<footer></footer>
+
+
+
+{% endblock %}

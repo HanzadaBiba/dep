@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<header>
+    <h2>База сотрудников</h2>
+<form method="get" action="#">
+                            {% csrf_token %}
+							<input type="text" class="text" name="q" placeholder="Поиск" />
+
+						</form></header>
+<section>
+{% for worker in workers %}
+
+<div class="worker">
+<div class="in">
+    <img  {% if worker.gender %}
+    src="{% static 'user_male-512.png'%}"
+{% else %}
+    src="{% static 'administrator-female.png'%}"
+{% endif %}  >
+
+</div>
+    <h1>{{ worker }}</h1>
+    <p><img {% if worker.image %} src="{{ worker.image.url }}"{% else %} src="{% static 'ad260035aaf04b602326fd869db07c54.PNG'%}" {% endif %}  class="imgdesc"> </p>
+<button><a href="{{ worker.get_absolute_url }}">Показать резюме</a></button>
+
+</div>
+{% endfor %}
+
+</section>
+ <div class="pagination">
+
+            {% include 'pagination.html' with page=workers %}
+                </div>
+
+    <footer>
+    
+
+</footer>
+
+{% endblock %}
+{% block title %}
+База сотрудников
+{% endblock %}
